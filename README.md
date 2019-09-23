@@ -5,7 +5,7 @@ A package that helps you to upload media files to [telegra.ph](https://telegra.p
 ## Usage
 
 #### By buffer
-```
+```javascript
 const {uploadByBuffer} = require('telegraph-uploader')
 const fs = require('fs')
 
@@ -20,7 +20,7 @@ uploadByBuffer(fs.readFileSync('image.png'), 'image/png')
 ```
 
 #### By URL
-```
+```javascript
 const {uploadByUrl} = require('telegraph-uploader')
 
 uploadByUrl('https://link.to/image')
@@ -34,9 +34,7 @@ uploadByUrl('https://link.to/image')
 ```
 
 #### HTTP Proxy
-
-
-```
+```javascript
 const {uploadByUrl} = require('telegraph-uploader')
 
 uploadByUrl('https://link.to/image', 'http://user:pass@1.1.1.1:8888')

@@ -6,9 +6,7 @@ const isStream = require('isstream')
 
 const toArray = require('stream-to-array')
 
-const HttpsProxyAgent = require('https-proxy-agent')
-
-const uploadByUrl = (url, proxy) => {
+const uploadByUrl = (url, agent) => {
   return fetch(url)
     .then(async (r) => {
       if (!isStream(r.body)) {
@@ -21,11 +19,11 @@ const uploadByUrl = (url, proxy) => {
         throw new Error('No content types in the response')
       }
 
-      return uploadByBuffer(buffer, r.headers.get('content-type'), proxy)
+      return uploadByBuffer(buffer, r.headers.get('content-type'), agent)
     })
 }
 
-const uploadByBuffer = (buffer, contentType, proxy) => {
+const uploadByBuffer = (buffer, contentType, agent) => {
   if (!isBuffer(buffer)) {
     throw new TypeError('Buffer is not a Buffer')
   }
@@ -34,9 +32,7 @@ const uploadByBuffer = (buffer, contentType, proxy) => {
   form.append('photo', buffer, {
     filename: 'blob',
     contentType,
-    ...proxy && {
-      agent: new HttpsProxyAgent(proxy),
-    },
+    ...agent && {agent},
   })
 
   return fetch('https://telegra.ph/upload', {

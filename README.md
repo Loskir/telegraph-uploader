@@ -4,6 +4,20 @@ A package that helps you to upload media files to [telegra.ph](https://telegra.p
 
 ## Usage
 
+#### `uploadByBuffer`
+`uploadByBuffer(buffer, contentType, [agent]) => Promise<Response>`
+
+#### `uploadByUrl`
+`uploadByUrl(url, [agent]) => Promise<Response>`
+
+#### Agent
+An instance of `https.Agent` class (you can use this for proxies, search [`https-proxy-agent`](https://npmjs.com/https-proxy-agent), [`socks5-proxy-agent`](https://npmjs.com/https-proxy-agent) etc.)
+
+#### Response
+`{link: String, path: String}`
+
+## Examples
+
 #### By buffer
 ```javascript
 const {uploadByBuffer} = require('telegraph-uploader')
@@ -31,12 +45,4 @@ uploadByUrl('https://link.to/image')
          path: '/file/...',
        } */
   })
-```
-
-#### HTTP Proxy
-```javascript
-const {uploadByUrl} = require('telegraph-uploader')
-
-uploadByUrl('https://link.to/image', 'http://user:pass@1.1.1.1:8888')
-  .then((result) => {/*...*/})
 ```

@@ -6,7 +6,9 @@ const isStream = require('isstream')
 
 const toArray = require('stream-to-array')
 
-const uploadByUrl = (url) => {
+const HttpsProxyAgent = require('https-proxy-agent')
+
+const uploadByUrl = (url, proxy) => {
   return fetch(url)
     .then(async (r) => {
       if (!isStream(r.body)) {
@@ -19,19 +21,22 @@ const uploadByUrl = (url) => {
         throw new Error('No content types in the response')
       }
 
-      return uploadByBuffer(buffer, r.headers.get('content-type'))
+      return uploadByBuffer(buffer, r.headers.get('content-type'), proxy)
     })
 }
 
-const uploadByBuffer = (buffer, contentType, filename) => {
+const uploadByBuffer = (buffer, contentType, proxy) => {
   if (!isBuffer(buffer)) {
     throw new TypeError('Buffer is not a Buffer')
   }
   const form = new FormData()
 
   form.append('photo', buffer, {
-    filename: filename || 'blob',
+    filename: 'blob',
     contentType,
+    ...proxy && {
+      agent: new HttpsProxyAgent(proxy),
+    },
   })
 
   console.log(form)

@@ -9,7 +9,6 @@ const toArray = require('stream-to-array')
 const uploadByUrl = (url) => {
   return fetch(url)
     .then(async (r) => {
-      console.log(r.headers.get('content-type'))
       if (!isStream(r.body)) {
         throw new TypeError('Response is not a stream')
       }

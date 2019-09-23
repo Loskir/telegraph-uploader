@@ -39,8 +39,6 @@ const uploadByBuffer = (buffer, contentType, proxy) => {
     },
   })
 
-  console.log(form)
-
   return fetch('https://telegra.ph/upload', {
     method: 'POST',
     body: form

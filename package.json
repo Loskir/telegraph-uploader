@@ -1,6 +1,6 @@
 {
   "name": "telegraph-uploader",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A package that helps you to upload media files to telegra.ph",
   "main": "index.js",
   "scripts": {
@@ -22,8 +22,6 @@
   "homepage": "https://github.com/loskir/telegraph-uploader#readme",
   "dependencies": {
     "form-data": "^2.5.1",
-    "is-buffer": "^2.0.3",
-    "isstream": "^0.1.2",
     "node-fetch": "^2.6.0",
     "stream-to-array": "^2.3.0"
   }

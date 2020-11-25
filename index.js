@@ -1,15 +1,14 @@
+const stream = require('stream')
+
 const fetch = require('node-fetch')
 const FormData = require('form-data')
-
-const isBuffer = require('is-buffer')
-const isStream = require('isstream')
 
 const toArray = require('stream-to-array')
 
 const uploadByUrl = (url, agent) => {
   return fetch(url)
     .then(async (r) => {
-      if (!isStream(r.body)) {
+      if (!(r.body instanceof stream.Stream)) {
         throw new TypeError('Response is not a stream')
       }
       const array = await toArray(r.body)
@@ -24,7 +23,7 @@ const uploadByUrl = (url, agent) => {
 }
 
 const uploadByBuffer = (buffer, contentType, agent) => {
-  if (!isBuffer(buffer)) {
+  if (!Buffer.isBuffer(buffer)) {
     throw new TypeError('Buffer is not a Buffer')
   }
   const form = new FormData()

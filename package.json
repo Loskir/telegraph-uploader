@@ -22,7 +22,7 @@
   "homepage": "https://github.com/loskir/telegraph-uploader#readme",
   "dependencies": {
     "form-data": "^2.5.1",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^3.1.1",
     "stream-to-array": "^2.3.0"
   }
 }
